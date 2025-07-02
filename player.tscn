@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://bur4mo4q4u8jy"]
+
+[ext_resource type="Script" uid="uid://doepkjomcowhp" path="res://player.gd" id="1_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://de5qixdpwo1hs" path="res://player.png" id="2_hqtel"]
+[ext_resource type="PackedScene" uid="uid://ccrw55iibq8uf" path="res://Enemy.tscn" id="3_sweqy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0hol4"]
+radius = 50.0
+height = 132.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i3pqv"]
+radius = 54.0
+height = 154.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="player" type="CharacterBody2D" parent="."]
+position = Vector2(87, 91)
+script = ExtResource("1_i3pqv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2(-2, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0hol4")
+
+[node name="Sprite2D" type="Sprite2D" parent="player"]
+rotation = 1.5708
+texture = ExtResource("2_hqtel")
+
+[node name="Area2D" type="Area2D" parent="player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/Area2D"]
+position = Vector2(-8, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_i3pqv")
+
+[node name="Enemy" parent="." instance=ExtResource("3_sweqy")]
+position = Vector2(471, 574)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_sweqy")]
+position = Vector2(551, 100)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_sweqy")]
+position = Vector2(549, 408)
+
+[node name="Enemy4" parent="." instance=ExtResource("3_sweqy")]
+position = Vector2(843, 235)
+
+[node name="Enemy5" parent="." instance=ExtResource("3_sweqy")]
+position = Vector2(754, 532)
+
+[node name="Enemy6" parent="." instance=ExtResource("3_sweqy")]
+position = Vector2(120, 479)
+
+[connection signal="body_entered" from="player/Area2D" to="player" method="_on_area_2d_body_entered"]
